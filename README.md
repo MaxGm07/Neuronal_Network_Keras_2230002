@@ -37,13 +37,14 @@ Se puede comprobar la versión de python empleando el comando en terminal:
 **IMPORTANTE:** Se requiere instalar ese rango de versiones debido a que tensorflow solo se puede emplear en esas versiones de python (https://www.tensorflow.org/install/pip?hl=es).
 
 **En PowerShell:**
-
+  ```
   python --version
+  ```
 
 **En Unix**
-
+  ```
   python3 --version
-
+  ```
 
 Librerías (dependencias):
 * NumPy: Para cálculos numéricos y manejo de arreglos.
