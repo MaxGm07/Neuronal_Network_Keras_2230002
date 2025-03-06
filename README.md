@@ -1,4 +1,4 @@
-# 💡 Red Neuronal con NumPy 🧩
+# 💡 Red Neuronal con Keras 🧩
 
 ![Estado](https://img.shields.io/badge/Estado-Completado-brightgreen)
 
