@@ -79,7 +79,7 @@ Sigue estos pasos para ejecutar el proyecto en tu lab:
 Abre una terminal y ejecuta el siguiente comando para clonar el repositorio en tu computadora:
 
 ```bash
-git clone https://github.com/MaxGm07/Neuronal_Network_Numpy_2230002
+git clone https://github.com/MaxGm07/Neuronal_Network_Keras_2230002
 ```
 ### Cree un nuevo entorno virtual
 Se recomienda tener el entorno virtual generado en la carpeta principal para un fácil acceso, su activación y desactivación se realiza de la siguiente forma:
