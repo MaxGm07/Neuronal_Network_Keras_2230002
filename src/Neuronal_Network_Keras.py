@@ -7,54 +7,57 @@ from keras.utils import to_categorical  # type: ignore
 from keras.datasets import mnist  # type: ignore
 
 def E_Red_neuronal():
-    # Cargamos el conjunto de datos MNIST, que tiene imágenes de dígitos escritos a mano
+    """
+    Function to create, train, and evaluate a neural network using the MNIST dataset.
+    """
+    # Load the MNIST dataset, which contains images of handwritten digits
     (train_data_x, train_labels_y), (test_data_x, test_labels_y) = mnist.load_data()
 
-    # Mostramos información sobre los datos de entrenamiento
-    print("Forma de los datos de entrenamiento:", train_data_x.shape)  # Tamaño de las imágenes de entrenamiento (60000 imágenes de 28x28 píxeles)
-    print("Etiqueta del primer ejemplo de entrenamiento:", train_labels_y[10])  # Etiqueta de la primera imagen (qué número es)
-    print("Forma de los datos de prueba:", test_data_x.shape)  # Tamaño de las imágenes de prueba (10000 imágenes de 28x28 píxeles)
+    # Display information about the training data
+    print("Shape of training data:", train_data_x.shape)  # Size of training images (60000 images of 28x28 pixels)
+    print("Label of the first training example:", train_labels_y[10])  # Label of the first image (which digit it is)
+    print("Shape of test data:", test_data_x.shape)  # Size of test images (10000 images of 28x28 pixels)
 
-    # Mostramos una de las imágenes de entrenamiento para ver cómo se ve
-    plt.imshow(train_data_x[10])  # Mostramos la imagen en escala de grises
-    plt.title("Ejemplo de una Imagen de Entrenamiento")  # Le ponemos un título a la imagen
-    plt.show()  # Mostramos la imagen en una ventana
+    # Display one of the training images to visualize it
+    plt.imshow(train_data_x[10])  # Show the image in grayscale
+    plt.title("Example of a Training Image")  # Add a title to the image
+    plt.show()  # Display the image in a window
 
-    # Creamos la red neuronal
+    # Create the neural network model
     model = Sequential([
-        Input(shape=(28 * 28,)),  # Capa de entrada: las imágenes se aplanan a un vector de 784 valores (28x28)
-        Dense(512, activation='relu'),  # Capa oculta: 512 neuronas con activación ReLU (una función que ayuda a aprender mejor)
-        Dense(10, activation='softmax')  # Capa de salida: 10 neuronas (una por cada dígito del 0 al 9) con activación softmax (para obtener probabilidades)
+        Input(shape=(28 * 28,)),  # Input layer: images are flattened into a vector of 784 values (28x28)
+        Dense(512, activation='relu'),  # Hidden layer: 512 neurons with ReLU activation (helps the network learn better)
+        Dense(10, activation='softmax')  # Output layer: 10 neurons (one for each digit from 0 to 9) with softmax activation (to get probabilities)
     ])
 
-    # Configuramos el modelo para que sepa cómo aprender
+    # Configure the model for training
     model.compile(
-        optimizer='rmsprop',  # Usamos el optimizador RMSprop para ajustar los pesos de la red
-        loss='categorical_crossentropy',  # Función de pérdida: mide qué tan mal está aprendiendo la red
-        metrics=['accuracy']  # Métrica: queremos medir la precisión (porcentaje de aciertos)
+        optimizer='rmsprop',  # Use the RMSprop optimizer to adjust the weights of the network
+        loss='categorical_crossentropy',  # Loss function: measures how poorly the network is learning
+        metrics=['accuracy']  # Metric: we want to measure accuracy (percentage of correct predictions)
     )
 
-    # Mostramos un resumen de cómo está construida la red neuronal
-    print("Resumen del modelo:")
-    model.summary()  # Nos dice cuántas capas tiene, cuántos parámetros, etc.
+    # Display a summary of the neural network architecture
+    print("Model summary:")
+    model.summary()  # Shows the number of layers, parameters, etc.
 
-    # Preparamos los datos de entrenamiento para que la red pueda usarlos
-    x_train = train_data_x.reshape(60000, 28 * 28)  # Aplanamos las imágenes de 28x28 a vectores de 784 valores
-    x_train = x_train.astype('float32') / 255  # Normalizamos los valores de los píxeles para que estén entre 0 y 1
-    y_train = to_categorical(train_labels_y)  # Convertimos las etiquetas a un formato especial (one-hot encoding)
+    # Prepare the training data for the network
+    x_train = train_data_x.reshape(60000, 28 * 28)  # Flatten the 28x28 images into vectors of 784 values
+    x_train = x_train.astype('float32') / 255  # Normalize pixel values to be between 0 and 1
+    y_train = to_categorical(train_labels_y)  # Convert labels to one-hot encoding format
 
-    # Preparamos los datos de prueba de la misma manera
-    x_test = test_data_x.reshape(10000, 28 * 28)  # Aplanamos las imágenes de prueba
-    x_test = x_test.astype('float32') / 255  # Normalizamos los valores de los píxeles
-    y_test = to_categorical(test_labels_y)  # Convertimos las etiquetas de prueba
+    # Prepare the test data in the same way
+    x_test = test_data_x.reshape(10000, 28 * 28)  # Flatten the test images
+    x_test = x_test.astype('float32') / 255  # Normalize pixel values
+    y_test = to_categorical(test_labels_y)  # Convert test labels to one-hot encoding
 
-    # Entrenamos la red neuronal
-    print("Entrenando la red neuronal...")
-    model.fit(x_train, y_train, epochs=10, batch_size=128)  # Entrenamos durante 10 épocas, usando paquetes de 128 imágenes
+    # Train the neural network
+    print("Training the neural network...")
+    model.fit(x_train, y_train, epochs=10, batch_size=128)  # Train for 10 epochs, using batches of 128 images
 
-    # Evaluamos la red neuronal con los datos de prueba
-    print("Evaluando la red neuronal...")
-    loss, accuracy = model.evaluate(x_test, y_test)  # Calculamos la pérdida y la precisión en el conjunto de prueba
-    print(f"Pérdida: {loss}, Precisión: {accuracy}")  # Mostramos los resultados
+    # Evaluate the neural network on the test data
+    print("Evaluating the neural network...")
+    loss, accuracy = model.evaluate(x_test, y_test)  # Calculate loss and accuracy on the test set
+    print(f"Loss: {loss}, Accuracy: {accuracy}")  # Display the results
 
-    plt.show() 
+    plt.show()  # Show any remaining plots

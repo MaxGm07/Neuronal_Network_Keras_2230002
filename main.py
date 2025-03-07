@@ -1,13 +1,12 @@
 from src.Neuronal_Network_Keras import E_Red_neuronal
 
-
 def main():
     """
-    Función principal que inicia el entrenamiento de la red neuronal.
+    Main function that initiates the training of the neural network.
     """
-    print("Iniciando el entrenamiento de la red neuronal...")
-    E_Red_neuronal()
+    print("Starting neural network training...")
+    E_Red_neuronal()  # Call the function to train the neural network
 
-# Punto de entrada del script
+# Entry point of the script
 if __name__ == "__main__":
-    main()
+    main()  # Execute the main function when the script is run
